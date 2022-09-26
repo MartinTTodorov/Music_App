@@ -8,6 +8,9 @@ public class MusicIndividualApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MusicIndividualApplication.class, args);
+
+		System.out.println("test");
 	}
+
 
 }
