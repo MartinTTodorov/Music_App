@@ -9,9 +9,11 @@ stages:
 build:
   stage: build
   script:
+    - cd music_individual
     - .\gradlew assemble
 
 test:
   stage: test
   script:
+    - cd music_individual
     - .\gradlew test
