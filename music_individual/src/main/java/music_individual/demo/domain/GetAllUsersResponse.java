@@ -1,4 +1,4 @@
-package domain;
+package music_individual.demo.domain;
 
 public class GetAllUsersResponse {
 }
