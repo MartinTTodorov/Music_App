@@ -1,44 +1,37 @@
 package music_individual.demo.controller;
 
-import music_individual.demo.domain.*;
 import music_individual.demo.business.*;
-import music_individual.demo.business.GetSongUseCase;
 import lombok.AllArgsConstructor;
-import music_individual.demo.business.GetSongsUseCase;
-import music_individual.demo.domain.GetAllSongsRequest;
-import music_individual.demo.domain.GetAllSongsResponse;
+import music_individual.demo.domain.CreateSongRequest;
+import music_individual.demo.persistence.entities.SongEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 
 @RestController
 @RequestMapping("/songs")
+@CrossOrigin("http://localhost:3000/")
 @AllArgsConstructor
 public class SongController {
 
-    private final GetSongUseCase getSongUseCase;
-    private final GetSongsUseCase getSongsUseCase;
 
-    private final CreateSongUseCase createSongUseCase;
+    private final ISongsManager songsManager;
 
     @GetMapping()
-    @CrossOrigin("http://localhost:3000/")
-    public ResponseEntity<GetAllSongsResponse> getAllSongs(@RequestParam(value="type", required = false) String type){
-        GetAllSongsRequest request = GetAllSongsRequest.builder().type(type).build();
-        GetAllSongsResponse response = getSongsUseCase.getSongs(request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity GetAllSongs(){
+
+        return ResponseEntity.ok(songsManager.GetAllSongs());
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Song> getSong(@PathVariable(value = "id") final int id){
-        final Optional<Song> songOptional = getSongUseCase.getSong(id);
-        if (songOptional.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(songOptional.get());
+    @PostMapping()
+    public ResponseEntity CreateSong(@RequestBody CreateSongRequest request){
+        songsManager.AddSong(SongEntity.builder().name(request.getName()).author(request.getAuthor()).type(request.getType()).build());
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successful");
     }
+
+
+
 }
 
 

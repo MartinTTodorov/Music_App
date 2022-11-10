@@ -4,18 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name="song")
+@Table(name = "Playlist_songs")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SongEntity {
+public class PlaylistSongs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +22,10 @@ public class SongEntity {
     private Integer id;
 
     @NotBlank
-    @Length(min=2, max=100)
     @Column
-    private String name;
+    private Integer playlistID;
 
     @NotBlank
-    @Length(min=2, max=100)
     @Column
-    private String type;
-
-    @NotBlank
-    @Length(min=2, max=100)
-    @Column
-    private String author;
+    private Integer songID;
 }
