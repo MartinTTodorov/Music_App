@@ -31,6 +31,8 @@ public class SongController {
     }
 
 
+    @isAuthorized
+    @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping()
     public ResponseEntity CreateSong(@RequestBody CreateSongRequest request){
         songsManager.AddSong(SongEntity.builder().name(request.getName()).author(request.getAuthor()).type(request.getType()).build());
