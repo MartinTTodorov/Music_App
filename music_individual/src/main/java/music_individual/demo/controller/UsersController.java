@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+import music_individual.demo.security.Authorization.isAuthorized;
 import javax.validation.Valid;
 
 @RestController
@@ -19,6 +21,8 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class UsersController {
     final IUsersManager usersManager;
+
+
 
     @GetMapping()
     public ResponseEntity GetAllUsers(){
@@ -32,35 +36,23 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity CreateUser(@RequestBody CreateUserRequest request){
-        try{
+        usersManager.AddUser(UserEntity.builder().username((request.getUsername())).password(request.getPassword()).role("Listener").build());
 
-        usersManager.AddUser(UserEntity.builder().username((request.getUsername())).password(request.getPassword()).build());
-        }
-        catch(Exception exception){
-            //handle here
-        }
         return ResponseEntity.status(HttpStatus.CREATED).body("Successful");
     }
 
     @DeleteMapping("{userId}")
     public ResponseEntity DeleteUser(@PathVariable Integer userId){
-        try{
-        usersManager.DeleteUser(userId);}
-        catch(Exception ex){
-           //handle here
-        }
+
+        usersManager.DeleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Void> UpdateUser(@PathVariable("id") Integer id, @RequestBody @Valid UpdateUserRequest request){
         request.setId(id);
-        try{
+
         usersManager.UpdateUser(request);
-        }
-        catch(Exception ex){
-            //handle here
-        }
         return ResponseEntity.noContent().build();
     }
 }

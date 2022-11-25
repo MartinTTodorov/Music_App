@@ -17,3 +17,9 @@ test:
   script:
     - cd music_individual
     - .\gradlew test
+
+sonarqube:
+  stage: sonarqube
+  script:
+    - cd music_individual
+    - .\gradlew sonarqube

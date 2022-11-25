@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -40,4 +41,9 @@ public class UserEntity {
     @Length(min=2, max=100)
     @Column
     private String email;
+
+    @NotBlank
+    @Length(min = 2, max = 100)
+    @Column
+    private String role;
 }
