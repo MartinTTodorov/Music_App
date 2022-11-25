@@ -19,7 +19,7 @@ test:
     - .\gradlew test
 
 sonarqube:
-  stage: sonarqube
+  stage: .post
   script:
     - cd music_individual
     - .\gradlew sonarqube
