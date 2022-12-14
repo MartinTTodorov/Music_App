@@ -32,6 +32,7 @@ public class LoginManagerImpl implements ILoginManager {
         return LoginResponse.builder().accessToken(accessToken).build();
     }
 
+    //test
     private String generateAccessToken(UserEntity user){
         return accessTokenManager.encode(AccessToken.builder()
                 .subject(user.getUsername())
