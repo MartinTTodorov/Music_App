@@ -1,6 +1,7 @@
 package music_individual.demo.persistence.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,4 +47,9 @@ public class UserEntity {
     @Length(min = 2, max = 100)
     @Column
     private String role;
+
+//    @OneToOne(fetch = FetchType.EAGER)
+//    private PlaylistEntity playlist;
+
+
 }

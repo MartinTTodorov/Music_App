@@ -31,6 +31,7 @@ public class SongController {
     }
 
 
+
     @isAuthorized
     @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping()
@@ -38,6 +39,8 @@ public class SongController {
         songsManager.AddSong(SongEntity.builder().name(request.getName()).author(request.getAuthor()).type(request.getType()).build());
         return ResponseEntity.status(HttpStatus.CREATED).body("Successful");
     }
+
+
 
 
 

@@ -1,5 +1,6 @@
 package music_individual.demo.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="song")
@@ -36,4 +39,7 @@ public class SongEntity {
     @Length(min=2, max=100)
     @Column
     private String author;
+
+    @ManyToMany(mappedBy = "songs")
+    private List<PlaylistEntity> playlists = new ArrayList<>();
 }

@@ -36,7 +36,7 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity CreateUser(@RequestBody CreateUserRequest request){
-        usersManager.AddUser(UserEntity.builder().username((request.getUsername())).password(request.getPassword()).role("Listener").build());
+        usersManager.AddUser(UserConverter(request));
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Successful");
     }
@@ -52,7 +52,15 @@ public class UsersController {
     public ResponseEntity<Void> UpdateUser(@PathVariable("id") Integer id, @RequestBody @Valid UpdateUserRequest request){
         request.setId(id);
 
-        usersManager.UpdateUser(request);
+        usersManager.UpdateUser(UserConverter(request));
         return ResponseEntity.noContent().build();
+    }
+
+    public UserEntity UserConverter(CreateUserRequest request){
+        return UserEntity.builder().username((request.getUsername())).password(request.getPassword()).role("Listener").build();
+    }
+
+    public UserEntity UserConverter(UpdateUserRequest request){
+        return UserEntity.builder().id(request.getId()).password(request.getPassword()).email(request.getEmail()).build();
     }
 }

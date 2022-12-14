@@ -4,6 +4,7 @@ package music_individual.demo.business.impl;
 import lombok.AllArgsConstructor;
 import music_individual.demo.business.IAccessTokenManager;
 import music_individual.demo.business.ILoginManager;
+import music_individual.demo.business.exception.InvalidCredentialsException;
 import music_individual.demo.domain.AccessToken;
 import music_individual.demo.domain.LoginRequest;
 import music_individual.demo.domain.LoginResponse;
@@ -23,12 +24,12 @@ public class LoginManagerImpl implements ILoginManager {
     public LoginResponse login(LoginRequest loginRequest) {
         UserEntity user = repo.findByUsername(loginRequest.getUsername());
 
-        String accessToken = generateAccessToken(user);
+        String accessToken;
+        if(!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())){
+            throw new InvalidCredentialsException();
+        }
+        accessToken = generateAccessToken(user);
         return LoginResponse.builder().accessToken(accessToken).build();
-    }
-
-    private boolean checkPassword(String userPassword, String encodedPassword){
-        return passwordEncoder.matches(userPassword, encodedPassword);
     }
 
     private String generateAccessToken(UserEntity user){

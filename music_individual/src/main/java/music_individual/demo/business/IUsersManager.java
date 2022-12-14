@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IUsersManager {
     public List<UserEntity> GetAllUsers();
-    public void AddUser(UserEntity user);
-    public void UpdateUser(UpdateUserRequest request);
-    public void DeleteUser(Integer id);
+    public UserEntity AddUser(UserEntity user);
+    public void UpdateUser(UserEntity user);
+    public boolean DeleteUser(Integer id);
     public UserEntity GetUserByID(Integer id);
 }
