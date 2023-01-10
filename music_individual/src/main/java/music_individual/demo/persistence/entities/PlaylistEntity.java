@@ -37,9 +37,10 @@ public class PlaylistEntity {
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "playlist_songs",
-            joinColumns = {@JoinColumn(name = "playlist_id")},
-            inverseJoinColumns = {@JoinColumn(name = "song_id")}
+            joinColumns = {@JoinColumn(name = "playlist_id", referencedColumnName = "id"
+            )},
+            inverseJoinColumns = {@JoinColumn(name = "song_id", referencedColumnName = "id"
+            )}
     )
-    @JsonIgnore
     private List<SongEntity> songs = new ArrayList<>();
 }

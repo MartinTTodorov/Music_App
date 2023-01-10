@@ -40,6 +40,7 @@ public class SongEntity {
     @Column
     private String author;
 
-    @ManyToMany(mappedBy = "songs")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "songs")
+    @JsonIgnore
     private List<PlaylistEntity> playlists = new ArrayList<>();
 }

@@ -21,6 +21,16 @@ public class PlaylistsManagerImpl implements IPlaylistsManager {
     }
 
     @Override
+    public List<PlaylistEntity> getUserPlaylists(Integer id) {
+        return repo.findAllByUserId(id).stream().toList();
+    }
+
+    @Override
+    public PlaylistEntity getPlaylistByID(Integer id) {
+        return repo.findById(id).get();
+    }
+
+    @Override
     public void AddPlaylist(PlaylistEntity playlist) {
         repo.save(playlist);
     }
