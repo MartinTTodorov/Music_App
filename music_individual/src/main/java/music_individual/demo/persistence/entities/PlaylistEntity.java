@@ -1,11 +1,9 @@
 package music_individual.demo.persistence.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import music_individual.demo.persistence.entities.SongEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -43,4 +41,8 @@ public class PlaylistEntity {
             )}
     )
     private List<SongEntity> songs = new ArrayList<>();
+
+    private void addSong(SongEntity song){
+        songs.add(song);
+    }
 }

@@ -3,10 +3,11 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
 	id 'java'
 	id "org.sonarqube" version "3.4.0.2513"
-
-
+	id 'jacoco'
 
 }
+
+
 
 group = 'music_individual'
 version = '0.0.1-SNAPSHOT'
@@ -47,3 +48,33 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.required = true
+	}
+}
+
+
+jacoco {
+	toolVersion = "0.8.7"
+}
+
+
+sonarqube {
+	properties {
+		property 'sonar.host.url', 'http://localhost:9000'
+	}
+}
+
+tasks.named('sonarqube').configure {
+	dependsOn test
+}
+test.finalizedBy jacocoTestReport

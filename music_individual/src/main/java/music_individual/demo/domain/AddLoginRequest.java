@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class CreateSongRequest {
-    private String name;
-    private String author;
-    private String type;
+@AllArgsConstructor
+public class AddLoginRequest {
+    private Integer id;
+    private String time;
+    private Integer userId;
 }

@@ -18,7 +18,10 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request){
-        LoginResponse response = loginManager.login(request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(loginConverter(request));
+    }
+
+    public LoginResponse loginConverter(LoginRequest request){
+        return loginManager.login(request);
     }
 }

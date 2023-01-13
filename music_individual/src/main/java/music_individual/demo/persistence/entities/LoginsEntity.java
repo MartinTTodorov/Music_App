@@ -6,23 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Music_rooms")
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class MusicRoomEntity {
+@AllArgsConstructor
+@Table(name = "logins")
+public class LoginsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer roomID;
+    private Integer id;
+
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity owner;
+    private UserEntity userId;
 
-//    private List<UserEntity> listeners;
-
+    @NotBlank
+    @Column
+    private String time;
 }

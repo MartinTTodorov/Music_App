@@ -47,24 +47,24 @@ public class UsersManagerImpl implements IUsersManager {
             repo.save(updatedUser);
         }
         else{
-            throw new ObjectMissingException();
+            throw new ObjectMissingException("User not found");
         }
 
     }
 
     @Override
     public boolean DeleteUser(Integer id){
+        repo.deleteById(id);
         if(repo.findById(id).isPresent()){
             throw new FailedCRUDException("User was not deleted successfully");
         }
-        repo.deleteById(id);
         return true;
     }
 
     @Override
     public UserEntity GetUserByID(Integer id) {
         if(!repo.findById(id).isPresent()){
-            throw new ObjectMissingException();
+            throw new ObjectMissingException("User not found");
         }
         return repo.findById(id).get();
     }

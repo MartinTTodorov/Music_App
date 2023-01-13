@@ -33,7 +33,7 @@ public class LoginManagerImpl implements ILoginManager {
     }
 
     //test
-    private String generateAccessToken(UserEntity user){
+    public String generateAccessToken(UserEntity user){
         return accessTokenManager.encode(AccessToken.builder()
                 .subject(user.getUsername())
                 .role(user.getRole())
